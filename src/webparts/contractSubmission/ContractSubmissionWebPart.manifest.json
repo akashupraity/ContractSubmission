@@ -1,0 +1,25 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "5501bc46-c3aa-4534-9e9f-e9c806320c99",
+  "alias": "ContractSubmissionWebPart",
+  "componentType": "WebPart",
+
+
+  "version": "*",
+  "manifestVersion": 2,
+
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", 
+    "group": { "default": "Advanced" },
+    "title": { "default": "ContractSubmission" },
+    "description": { "default": "ContractSubmission description" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "ContractSubmission"
+    }
+  }]
+}

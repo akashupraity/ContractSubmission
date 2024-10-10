@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "contract-submission-client-side-solution",
+    "id": "8ac3a246-432b-4743-b9cd-79ccd65be375",
+    "version": "1.0.0.21",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.17.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "ContractSubmission description"
+      },
+      "longDescription": {
+        "default": "ContractSubmission description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "contract-submission Feature",
+        "description": "The feature that activates elements of the contract-submission solution.",
+        "id": "cbcde1a2-63d6-42dc-9cfe-e7bf17d7fdaf",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/contract-submission.sppkg"
+  }
+}
