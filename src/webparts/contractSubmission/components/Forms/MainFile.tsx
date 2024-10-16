@@ -374,106 +374,234 @@ getSelectedContractSubmissionDetail = (selectedItem: any, formType: any) => {
 
       //--Get Periodically Items---
       let PeriodicallyDetails: any[] = [];
-      SPServices.GetDynamicDetails(selectedItem.ID, PeriodicallyListName)
-        .then((results) => {
-          results.map((item) => {
-            PeriodicallyDetails.push({
-              id: item.Id,
-              Id: item.Id,
-              AmountUSD: item.Title,
-              FirstPaymentDate: item.FirstPaymentDate != null ? this.ConvertDate(item.FirstPaymentDate) : null,
-              Period: item.Period,
-            });
-          });
+SPServices.GetDynamicDetails(selectedItem.ID, PeriodicallyListName)
+  .then((results) => {
+    results.map((item) => {
+      PeriodicallyDetails.push({
+        id: item.Id,
+        Id: item.Id,
+        AmountUSD: item.Title,
+        FirstPaymentDate: item.FirstPaymentDate != null ? this.ConvertDate(item.FirstPaymentDate) : null,
+        Period: item.Period,
+      });
+    });
+    // Sort by FirstPaymentDate in ascending order
+    PeriodicallyDetails.sort((a, b) => {
+      // Convert the date strings to Date objects for comparison
+      const dateA = new Date(a.FirstPaymentDate);
+      const dateB = new Date(b.FirstPaymentDate);
+      return dateA.getTime() - dateB.getTime(); // Sort in ascending order
+    });
+
+    this.setState({ IPeriodicallyModel: PeriodicallyDetails }); // Correctly access state
+    console.log(this.state.IPeriodicallyModel);
+  })
+  .catch((error) => {
+    console.error(error);
+  })
+      // let PeriodicallyDetails: any[] = [];
+      // SPServices.GetDynamicDetails(selectedItem.ID, PeriodicallyListName)
+      //   .then((results) => {
+      //     results.map((item) => {
+      //       PeriodicallyDetails.push({
+      //         id: item.Id,
+      //         Id: item.Id,
+      //         AmountUSD: item.Title,
+      //         FirstPaymentDate: item.FirstPaymentDate != null ? this.ConvertDate(item.FirstPaymentDate) : null,
+      //         Period: item.Period,
+      //       });
+      //     });
       
-          this.setState({ IPeriodicallyModel: PeriodicallyDetails }); // Correctly access state
-          console.log(this.state.IPeriodicallyModel);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      //     this.setState({ IPeriodicallyModel: PeriodicallyDetails }); // Correctly access state
+      //     console.log(this.state.IPeriodicallyModel);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
 
         //--Get Milestone Details Items---
         let MilestoneBasedDetails: any[] = [];
-        SPServices.GetDynamicDetails(selectedItem.ID, MilestonebasedListName)
-          .then((results) => {
-            results.map((item) => {
-              MilestoneBasedDetails.push({
-                id:item.Id,
-                Id:item.Id,
-                Description:item.Title,
-                ExpectedDate:item.ExpectedDate !=null?this.ConvertDate(item.ExpectedDate): null,
-                AmountUSD:item.AmountUSD,
-              });
-            });
+SPServices.GetDynamicDetails(selectedItem.ID, MilestonebasedListName)
+  .then((results) => {
+    results.map((item) => {
+      MilestoneBasedDetails.push({
+        id: item.Id,
+        Id: item.Id,
+        Description: item.Title,
+        ExpectedDate: item.ExpectedDate != null ? this.ConvertDate(item.ExpectedDate) : null,
+        AmountUSD: item.AmountUSD,
+      });
+    });
+
+    // Sort by ExpectedDate in ascending order
+    MilestoneBasedDetails.sort((a, b) => {
+      // Convert the date strings to Date objects for comparison
+      const dateA = new Date(a.ExpectedDate);
+      const dateB = new Date(b.ExpectedDate);
+      return dateA.getTime() - dateB.getTime(); // Sort in ascending order
+    });
+
+    this.setState({ IMilestoneBasedModel: MilestoneBasedDetails }); // Correctly access state
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+        // let MilestoneBasedDetails: any[] = [];
+        // SPServices.GetDynamicDetails(selectedItem.ID, MilestonebasedListName)
+        //   .then((results) => {
+        //     results.map((item) => {
+        //       MilestoneBasedDetails.push({
+        //         id:item.Id,
+        //         Id:item.Id,
+        //         Description:item.Title,
+        //         ExpectedDate:item.ExpectedDate !=null?this.ConvertDate(item.ExpectedDate): null,
+        //         AmountUSD:item.AmountUSD,
+        //       });
+        //     });
         
-            this.setState({IMilestoneBasedModel: MilestoneBasedDetails }); // Correctly access state
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        //     this.setState({IMilestoneBasedModel: MilestoneBasedDetails }); // Correctly access state
+        //   })
+        //   .catch((error) => {
+        //     console.error(error);
+        //   });
 
 
            //--Get Variable Periodiclly Details Items---
-        let VariablePeriodicallyDetails: any[] = [];
-        SPServices.GetDynamicDetails(selectedItem.ID, VariablePeriodicallyListName)
-          .then((results) => {
-            results.map((item) => {
-              VariablePeriodicallyDetails.push({
-                id:item.Id,
-                Id:item.Id,
-                AmountUSD:item.Title,
-                FromDate:item.FromDate !=null?this.ConvertDate(item.FromDate): null,
-                ToDate:item.ToDate !=null?this.ConvertDate(item.ToDate): null,
-                Period:item.Period
-              });
-            });
+           let VariablePeriodicallyDetails: any[] = [];
+SPServices.GetDynamicDetails(selectedItem.ID, VariablePeriodicallyListName)
+  .then((results) => {
+    results.map((item) => {
+      VariablePeriodicallyDetails.push({
+        id: item.Id,
+        Id: item.Id,
+        AmountUSD: item.Title,
+        FromDate: item.FromDate != null ? this.ConvertDate(item.FromDate) : null,
+        ToDate: item.ToDate != null ? this.ConvertDate(item.ToDate) : null,
+        Period: item.Period
+      });
+    });
+
+    // Sort by FromDate in ascending order
+    VariablePeriodicallyDetails.sort((a, b) => {
+      // Convert the date strings to Date objects for comparison
+      const dateA = new Date(a.FromDate);
+      const dateB = new Date(b.FromDate);
+      return dateA.getTime() - dateB.getTime(); // Sort in ascending order
+    });
+
+    this.setState({ IVariablePeriodicallyModel: VariablePeriodicallyDetails }); // Correctly access state
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+        // let VariablePeriodicallyDetails: any[] = [];
+        // SPServices.GetDynamicDetails(selectedItem.ID, VariablePeriodicallyListName)
+        //   .then((results) => {
+        //     results.map((item) => {
+        //       VariablePeriodicallyDetails.push({
+        //         id:item.Id,
+        //         Id:item.Id,
+        //         AmountUSD:item.Title,
+        //         FromDate:item.FromDate !=null?this.ConvertDate(item.FromDate): null,
+        //         ToDate:item.ToDate !=null?this.ConvertDate(item.ToDate): null,
+        //         Period:item.Period
+        //       });
+        //     });
         
-            this.setState({IVariablePeriodicallyModel: VariablePeriodicallyDetails }); // Correctly access state
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        //     this.setState({IVariablePeriodicallyModel: VariablePeriodicallyDetails }); // Correctly access state
+        //   })
+        //   .catch((error) => {
+        //     console.error(error);
+        //   });
 
         //--Get Obligation Details Items---
         let ObligationDetails: any[] = [];
-        SPServices.GetDynamicDetails(selectedItem.ID, ObligationListName)
-          .then((results) => {
-            results.map((item) => {
-              ObligationDetails.push({
-                id:item.Id,   
-                Id:item.Id,
-                Description:item.Title,
-                Date:item.Date !=null?this.ConvertDate(item.Date): null,
-                Frequency:item.Frequency,
-              });
-            });
+SPServices.GetDynamicDetails(selectedItem.ID, ObligationListName)
+  .then((results) => {
+    results.map((item) => {
+      ObligationDetails.push({
+        id: item.Id,   
+        Id: item.Id,
+        Description: item.Title,
+        Date: item.Date != null ? this.ConvertDate(item.Date) : null,
+        Frequency: item.Frequency,
+      });
+    });
+
+    // Sort by Date in ascending order
+    ObligationDetails.sort((a, b) => {
+      // Convert the date strings to Date objects for comparison
+      const dateA = new Date(a.Date);
+      const dateB = new Date(b.Date);
+      return dateA.getTime() - dateB.getTime(); // Sort in ascending order
+    });
+
+    this.setState({ IObligationModel: ObligationDetails }); // Correctly access state
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+        // let ObligationDetails: any[] = [];
+        // SPServices.GetDynamicDetails(selectedItem.ID, ObligationListName)
+        //   .then((results) => {
+        //     results.map((item) => {
+        //       ObligationDetails.push({
+        //         id:item.Id,   
+        //         Id:item.Id,
+        //         Description:item.Title,
+        //         Date:item.Date !=null?this.ConvertDate(item.Date): null,
+        //         Frequency:item.Frequency,
+        //       });
+        //     });
         
-            this.setState({IObligationModel: ObligationDetails }); // Correctly access state
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        //     this.setState({IObligationModel: ObligationDetails }); // Correctly access state
+        //   })
+        //   .catch((error) => {
+        //     console.error(error);
+        //   });
 
            //--Get Obligation Details Items---
-        let InsuranceDetails: any[] = [];
-        SPServices.GetDynamicDetails(selectedItem.ID, InsuranceListName)
-          .then((results) => {
-            results.map((item) => {
-              InsuranceDetails.push({
-                id:item.Id,
-                Id:item.Id,
-                Insurance:item.Title,
-                Amount:item.Amount,
-                Comment:item.Comment,
-              });
-            });
+           let InsuranceDetails: any[] = [];
+SPServices.GetDynamicDetails(selectedItem.ID, InsuranceListName)
+  .then((results) => {
+    results.map((item) => {
+      InsuranceDetails.push({
+        id: item.Id,
+        Id: item.Id,
+        Insurance: item.Title,
+        Amount: item.Amount,
+        Comment: item.Comment,
+      });
+    });
+
+    // Sort by Amount in ascending order
+    InsuranceDetails.sort((a, b) => {
+      return a.Amount - b.Amount; // Sort numerically based on Amount
+    });
+
+    this.setState({ IInsuranceModel: InsuranceDetails }); // Correctly access state
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+        // let InsuranceDetails: any[] = [];
+        // SPServices.GetDynamicDetails(selectedItem.ID, InsuranceListName)
+        //   .then((results) => {
+        //     results.map((item) => {
+        //       InsuranceDetails.push({
+        //         id:item.Id,
+        //         Id:item.Id,
+        //         Insurance:item.Title,
+        //         Amount:item.Amount,
+        //         Comment:item.Comment,
+        //       });
+        //     });
         
-            this.setState({IInsuranceModel: InsuranceDetails }); // Correctly access state
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        //     this.setState({IInsuranceModel: InsuranceDetails }); // Correctly access state
+        //   })
+        //   .catch((error) => {
+        //     console.error(error);
+        //   });
      
   });
   if (formType == "ChildEdit" || formType == "ViewChildSubmission") {

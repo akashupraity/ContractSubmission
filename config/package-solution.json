@@ -3,7 +3,7 @@
   "solution": {
     "name": "contract-submission-client-side-solution",
     "id": "8ac3a246-432b-4743-b9cd-79ccd65be375",
-    "version": "1.0.0.21",
+    "version": "1.0.0.22",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
